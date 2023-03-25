@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package scraper.model.v1;
+
+option go_package = "github.com/VampireAotD/anilibrary-grpc-gateway/gen/go/scraper/model/v1;scraper_model";
+
+message Anime {
+  string image = 1;
+  string title = 2;
+  string status = 3;
+  string episodes = 4;
+  repeated string genres = 5;
+  repeated string voice_acting = 6;
+  repeated string synonyms = 7;
+  float rating = 8;
+}

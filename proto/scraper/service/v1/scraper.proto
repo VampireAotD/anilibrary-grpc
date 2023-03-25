@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package scraper.service.v1;
+
+option go_package = "github.com/VampireAotD/anilibrary-grpc-gateway/gen/go/scraper/service/v1;scraper";
+
+import "validate/validate.proto";
+import "google/api/annotations.proto";
+import "scraper/model/v1/anime.proto";
+
+message ScrapeRequest {
+  string url = 1 [(validate.rules).string.pattern = "(https://animego.org/|https://animevost.org/).+"];
+}
+
+message ScrapeResponse {
+  model.v1.Anime anime = 1;
+}
+
+service ScraperService {
+  rpc Scrape (ScrapeRequest) returns (ScrapeResponse) {
+    option (google.api.http) = {
+      post: "/v1/anime/scrape"
+      body: "*"
+    };
+  };
+}
